@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" href="css/base.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+<script type="text/javascript">
+	window.onload=function(){
+		var oDiv=document.getElementById('back');
+		var aImg=oDiv.getElementsByTagName('img');
+		var aA=oDiv.getElementsByTagName('a');
+		var iNum=0;
+		function tab(){
+			if (iNum>1) {
+				iNum=0;
+			}
+			if (iNum<0) {
+				iNum=1;
+			}
+			for (var i = 0; i < aImg.length; i++) {
+				aImg[i].className='';
+			}
+			aImg[iNum].className='on';
+		}
+		setInterval(function(){
+			iNum++;
+			tab();
+		},3000);
+		aA[1].onclick=function(){
+			iNum++;
+			tab();
+		};
+		aA[0].onclick=function(){
+			iNum--;	
+			tab();
+		};
+	};
+</script>
+</head>
+
+<body>
+<div class="head">
+	<div class="banner clear">
+		<p></p>
+		<ul class="clear">
+			<li><a href="#">主页</a></li>
+			<li><a href="#">内容</a></li>
+			<li><a href="#">介绍</a></li>
+		</ul>
+	</div>
+	<div class="backimg" id="back">
+		<img src="images/body.jpg" alt="" class="on">
+		<img src="images/body1.jpg" alt="">
+		<a href="#" class="a1"></a>
+		<a href="#" class="a2"></a>
+	</div>
+</div>
+<div class="content">
+	<ul class="">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		div{position: absolute;top: 0;left: 0;width: 100px;height: 100px;background: red;}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var oBox=document.getElementById('box');
+			oBox.onmousedown=function(ev){
+				var oEvent=ev||event;
+				var disX=oEvent.clientX-oBox.offsetLeft;
+				var disY=oEvent.clientY-oBox.offsetTop;
+				
+				document.onmousemove=function(ev){
+					var oEvent=ev||event;
+					var l=oEvent.clientX-disX;
+					var t=oEvent.clientY-disY;
+					if (l<0) {
+						l=0;
+					}
+					if (t<0) {
+						t=0;
+					}
+					if (l>document.documentElement.clientWidth-oBox.offsetWidth) {
+						l=document.documentElement.clientWidth-oBox.offsetWidth;
+					}
+					if (t>document.documentElement.clientHeight-oBox.offsetHeight) {
+						t=document.documentElement.clientHeight-oBox.offsetHeight;
+					}
+					oBox.style.left=l+'px';
+					oBox.style.top=t+'px';
+					oBox.style.background='blue';
+					oBox.style.borderRadius=l+'px';
+				};
+				document.onmouseup=function(){
+					oBox.style.borderRadius='';
+					oBox.style.background='red';
+					document.onmousemove=null;
+					document.onmouseup=null;
+					oBox.releaseCapture && oBox.releaseCapture();
+					
+				};
+				oBox.setCapture && oBox.setCapture();
+				return false;
+			};
+		};
+	</script>
+</head>
+<body>
+<div id="box"></div>
+</body>
+</html>
